@@ -1,0 +1,32 @@
+//Solution -
+
+vector<vector<string> > Anagrams(vector<string>& string_list) {
+        int sz=string_list.size();
+        vector<vector<string>> result;
+        unordered_map<string,int> hashMap;
+        for(int i=0;i<sz;i++)
+        {
+            string new_string=string_list[i];
+            sort(new_string.begin(),new_string.end());
+            if(hashMap.find(new_string)==hashMap.end())
+            {
+                vector<string> temp;
+                result.push_back(temp);
+                hashMap[new_string]=result.size();
+            }
+            result[hashMap[new_string]-1].push_back(string_list[i]);
+        }
+        return result;
+}
+
+/*
+Time Complexity- O(N*|S|*log|S|) , where N is total number of strings and |S| denotes size of a string
+Space Complexity - O(N*|S|), for storing hashMap.
+
+Algorithm-
+1- Iterate through string list, create a copy of each string and sort it.
+2- Check if the sorted string has hashValue or not. If not, then give the sorted string a hashValue which is position of its anagrams in vector<vector<string>>.
+3- Push the original string in vector<vector<string>> at position = hashValue.
+4- Now all anagrams are stored , so output them one by one.
+
+*/
