@@ -1,0 +1,32 @@
+/*
+Time Complexity- O(NlogN).
+Space Complexity- O(1)
+
+Question15
+*/
+
+int calc(int mid,vector<int>&p)
+    {
+        int sum=0;
+        for(int i=0;i<p.size();i++)
+        {
+            sum+=ceil((double)p[i]/mid);
+        }
+        return sum;
+    }
+    int minEatingSpeed(vector<int>& piles, int h) {
+        int n=piles.size();
+        int st=1;    
+        int en=*max_element(begin(piles),end(piles));
+        while(st<en)
+        {
+            int mid=(st+en)/2;
+            if(calc(mid,piles)>h)
+            {
+                st=mid+1;
+            }
+            else
+                en=mid;
+        }
+        return en;
+    }
